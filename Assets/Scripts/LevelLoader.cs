@@ -4,6 +4,7 @@ using UnityEngine;
 using System.IO;
 using UnityEngine.SceneManagement;
 
+[System.Serializable]
 public class LevelLoader : MonoBehaviour
 {
     public string pathToFile;
@@ -13,7 +14,7 @@ public class LevelLoader : MonoBehaviour
     public GameObject Player;
     static Level level1, level2, level3;
     static Level currentLevel = level1;
-    StreamReader levelRead = new StreamReader(Application.streamingAssetsPath);
+    //StreamReader levelRead = new StreamReader(Application.streamingAssetsPath);
 
     [System.Serializable]
     public struct Level
@@ -60,16 +61,16 @@ public class LevelLoader : MonoBehaviour
 
     public void initializeLevels()
     {
-        setLevel(level1, "/Level01.json");
-        setLevel(level2, "/Level02.json");
-        setLevel(level3, "/Level03.json");
+        setLevel(level1, "Level01.json");
+        setLevel(level2, "Level02.json");
+        setLevel(level3, "Level03.json");
     }
 
     public void setLevel(Level level, string fileName)
     {
         pathToFile = Path.Combine(Application.streamingAssetsPath, fileName);
-        levelRead = new StreamReader(pathToFile);
-        jsonString = levelRead.ReadToEnd();
+        //levelRead = new StreamReader(pathToFile);
+        jsonString = File.ReadAllText(pathToFile);
         level = JsonUtility.FromJson<Level>(jsonString);
     }
 
