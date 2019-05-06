@@ -13,8 +13,7 @@ public class LevelLoader : MonoBehaviour
     public GameObject Floor;
     public GameObject Player;
     static Level level1, level2, level3;
-    static Level currentLevel = level1;
-    //StreamReader levelRead = new StreamReader(Application.streamingAssetsPath);
+    static Level currentLevel;
 
     [System.Serializable]
     public struct Level
@@ -47,7 +46,7 @@ public class LevelLoader : MonoBehaviour
     {
         Application.LoadLevel("Startmenue");
         initializeLevels();
-        instantiateFromJson();
+        currentLevel = level1;
     }
 
     // Update is called once per frame
@@ -69,30 +68,22 @@ public class LevelLoader : MonoBehaviour
     public void setLevel(Level level, string fileName)
     {
         pathToFile = Path.Combine(Application.streamingAssetsPath, fileName);
-        //levelRead = new StreamReader(pathToFile);
-        jsonString = File.ReadAllText(pathToFile);
+        StreamReader levelRead = new StreamReader(pathToFile);
+        jsonString = levelRead.ReadToEnd();
         level = JsonUtility.FromJson<Level>(jsonString);
     }
 
     public void loadNextLevel()
     {
-        if( currentLevel.Equals(level1))
+        if (currentLevel.Equals(level1))
         {
             currentLevel = level2;
-            instantiateFromJson();
         }
         else if (currentLevel.Equals(level2))
         {
             currentLevel = level3;
-            instantiateFromJson();
         }
     }
-
-    public void instantiateFromJson()
-    {
-        //adapt Xiao's to read from level
-    }
-
 }
 
 
