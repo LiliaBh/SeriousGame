@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 //This class will spawn a new coin each time the old one is destroyed
 public class CoinSpawner : MonoBehaviour
@@ -10,11 +11,13 @@ public class CoinSpawner : MonoBehaviour
     public Operation operation{get; private set;}
     public static int score;
 
+    public Scene scene;
     public static float p = .5f; //p probability value
   
     void Start()
     {
         this.Respawn(); //spawn new Coin
+        scene = SceneManager.GetActiveScene();
     }
 
     //Increase the probability of the sum operation
@@ -52,20 +55,27 @@ public class CoinSpawner : MonoBehaviour
         if (coin.correspondingNumber == this.operation.Result())
         {
             score++;
-            //Reset probability of the corresponding operation
-            if (!(p == .5f) && firstTrial)
+            if (scene.name == "Exercise 2")
             {
-               this. updateProbability();
+                //Reset probability of the corresponding operation
+                if (!(p == .5f) && firstTrial)
+                {
+                    this.updateProbability();
+                }
             }
             this.Respawn(); //if it was the correct coin => Respawn
         }
         else
-        {          
+        {
             if (score > 0)
             {
                 score--;
             }
-            this.updateProbability();
+
+            if (scene.name == "Exercise 2")
+            {
+                this.updateProbability();
+            }
         }
     }
 

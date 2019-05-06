@@ -12,9 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Startmenue.unity
     guid: 87657da9e80053443a84a8a0bae0d5a8
   - enabled: 1
-    path: Assets/Scenes/Game_Main2D.unity
+    path: Assets/Scenes/Exercise 1.unity
     guid: 1cf6b502f046e0b4093fc0cc862837a4
   - enabled: 1
-    path: Assets/Scenes/Levelselect.unity
+    path: Assets/Scenes/Exercise 2.unity
     guid: ad5a2d53db7a6a8438ed0b0822a7c279
   m_configObjects: {}
